@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerBattle : MonoBehaviour
 {
     // Move player in 2D space
     public float maxSpeed = 3.4f;
