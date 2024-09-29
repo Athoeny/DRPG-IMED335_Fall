@@ -1,0 +1,5 @@
+A and D to move left and right
+W to jump
+D to stomp
+P to spawn a target (only near the circle in the center)
+Space to fire
