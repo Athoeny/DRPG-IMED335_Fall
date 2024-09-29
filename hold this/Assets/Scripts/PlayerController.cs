@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -13,10 +14,7 @@ public class PlayerController : MonoBehaviour
     public float gravityScale = 0.8f;
     public Camera mainCamera;
 
-    public GameObject ssShotPrefab;
-    public Transform playerPosition;
-
-    bool facingRight = true;
+    public bool facingRight = true;
     float moveDirection = 0;
     bool isGrounded = false;
     Vector3 cameraPos;
@@ -47,7 +45,17 @@ public class PlayerController : MonoBehaviour
         // Movement controls
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && (isGrounded || Mathf.Abs(r2d.velocity.x) > 0.01f))
         {
-            moveDirection = Input.GetKey(KeyCode.A) ? -1 : 1;
+            if ((Input.GetKey(KeyCode.A)))
+            {
+                moveDirection = -1;
+                r2d.velocity = new Vector2(-maxSpeed, r2d.velocity.y);
+
+            }
+            else if ((Input.GetKey(KeyCode.D)))
+            {
+                moveDirection = 1;
+                r2d.velocity = new Vector2(maxSpeed, r2d.velocity.y);
+            }
         }
         else
         {
@@ -62,13 +70,14 @@ public class PlayerController : MonoBehaviour
         {
             if (moveDirection > 0 && !facingRight)
             {
-                facingRight = true;
-                t.localScale = new Vector3(Mathf.Abs(t.localScale.x), t.localScale.y, transform.localScale.z);
+                Debug.Log("flip");
+                Flip();
+                
             }
-            if (moveDirection < 0 && facingRight)
+            else if (moveDirection < 0 && facingRight)
             {
-                facingRight = false;
-                t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
+                Debug.Log("flip 2");
+                Flip();
             }
         }
 
@@ -85,13 +94,6 @@ public class PlayerController : MonoBehaviour
             r2d.velocity = Vector3.zero;
             r2d.gravityScale = 3f;
             Debug.Log("gravity mode is on whoag");
-        }
-
-        //Shooting
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(playerPosition.position);
-            Instantiate(ssShotPrefab, playerPosition.position, Quaternion.identity);
         }
     }
 
@@ -116,12 +118,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Apply movement velocity
-        r2d.velocity = new Vector2((moveDirection) * maxSpeed, r2d.velocity.y);
-
         // Simple debug
         Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
         Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
     }
 
+    void Flip()
+    {
+        facingRight = !facingRight;
+        t.Rotate(0f, 180f, 0f);
+    }
 }

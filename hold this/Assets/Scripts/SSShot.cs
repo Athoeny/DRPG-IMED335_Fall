@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class SSShot : MonoBehaviour
 {
-    public GameObject ssShotPrefab;
-    public Transform playerPosition;
+    public float speed = 15f;
+    public Rigidbody2D r2d;
 
-    public float bulletSpeed = 2f;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-
+        r2d.velocity = transform.right * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        EnemySingleShot enemy = hitInfo.GetComponent<EnemySingleShot>();
+        if (enemy != null)
         {
-            Debug.Log(playerPosition);
-            Instantiate(ssShotPrefab, playerPosition.position, Quaternion.identity);
+            enemy.TakeDamage(1);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Background"))
+        {
+            Destroy(gameObject);
         }
     }
 }
