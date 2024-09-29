@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
     public float moveSpeed;
 
     public Rigidbody2D rb;
+    public Animator animator;
 
     private Vector2 moveDirection;
 
@@ -27,6 +28,10 @@ public class NewBehaviourScript : MonoBehaviour
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", moveX);
+        animator.SetFloat("Vertical", moveY);
+        animator.SetFloat("Speed", moveDirection.sqrMagnitude);
 
         moveDirection = new Vector2(moveX, moveY).normalized;
     }
