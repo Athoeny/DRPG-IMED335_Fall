@@ -39,4 +39,18 @@ public class NewBehaviourScript : MonoBehaviour
     {
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
+    public void OnAnimatorIK(int layerIndex)
+
+    {
+
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "SceneTransitionTag")
+        {
+            GameBehaviour.Instance.sceneToMoveTo();
+        }
+
+    }
+     
 }
