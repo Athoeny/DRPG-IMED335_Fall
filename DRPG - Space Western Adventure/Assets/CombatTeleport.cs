@@ -31,7 +31,7 @@ namespace Assets
             if (other.CompareTag("Player"))
             {
                 // Load the specified scene
-                SceneManager.LoadScene("CombatLeveld");
+                SceneManager.LoadScene("CombatLevel");
             }
         }
     }
