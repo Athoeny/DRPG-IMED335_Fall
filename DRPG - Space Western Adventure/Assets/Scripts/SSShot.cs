@@ -7,8 +7,6 @@ public class SSShot : MonoBehaviour
     public float speed = 15f;
     public Rigidbody2D r2d;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         r2d.velocity = transform.right * speed;
@@ -24,11 +22,21 @@ public class SSShot : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Background"))
         {
             Destroy(gameObject);
+        }
+
+        if (collision.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(1);
+                Destroy(gameObject);
+            }
         }
     }
 }

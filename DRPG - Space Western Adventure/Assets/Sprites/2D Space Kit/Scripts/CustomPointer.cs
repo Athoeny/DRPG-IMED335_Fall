@@ -37,8 +37,9 @@ public class CustomPointer : MonoBehaviour {
 		instance = this;
 	
 	}
-	
-	void Start () {
+
+    [Obsolete]
+    void Start () {
 		Screen.lockCursor = true;
 		
 		deadzone_rect = new Rect((Screen.width / 2) - (deadzone_radius), (Screen.height / 2) - (deadzone_radius), deadzone_radius * 2, deadzone_radius * 2);
@@ -48,9 +49,10 @@ public class CustomPointer : MonoBehaviour {
 			
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    [Obsolete]
+    void Update () {
 		Screen.lockCursor = true;
 		if (use_mouse_input) {
 		
