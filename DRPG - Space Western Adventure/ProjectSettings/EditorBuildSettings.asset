@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattlePrototypeTestArea.unity
     guid: 617b2c65b21de1f4585d2b265a9060cc
+  - enabled: 1
+    path: Assets/Scenes/HubWorld2.unity
+    guid: 41f750103ff26be4db89b0d42f120f12
+  - enabled: 1
+    path: Assets/Scenes/CombatLevel.unity
+    guid: 8d9694fb4acdebe4b9d5d41be955b92a
   m_configObjects: {}
